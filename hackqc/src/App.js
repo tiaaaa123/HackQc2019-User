@@ -9,6 +9,7 @@ import OrganisationRouter from './organisations/OrganisationRouter';
 import ScannerRouter from './scan/ScanRouter';
 import './App.css';
 import Client from './Client';
+import AccountScreen from './account/AccountScreen';
 
 const styles = {
   content: {
@@ -38,12 +39,10 @@ class App extends Component {
         to: recipient.reference,
         amount: amount,
       });
-      console.log(response);
 
       this.setState({ sendingDonation: false });
     } catch (e) {
       this.setState({ sendingDonation: false });
-      console.log(e);
       throw e;
     }
   }
@@ -66,7 +65,7 @@ class App extends Component {
               onSendingDonation={this.sendDonation}
               sendingDonation={this.state.sendingDonation}
             />
-            <div key={2}>thrid tab</div>
+            <AccountScreen key={2} />
           </ItemsCarousel>
 
         </div>

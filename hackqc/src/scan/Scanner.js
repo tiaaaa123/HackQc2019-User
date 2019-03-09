@@ -23,7 +23,6 @@ class Scanner extends React.Component {
       const splittedData = data.split('/');
       const entityUUID = splittedData[splittedData.length - 1];
       const recipient = await Client.get(`recipients/${entityUUID}?lon=0&lat=0`, {});
-      console.log(recipient);
       if (recipient.type === 'CITIZEN_IN_NEEDS') {
         setTimeout(() => {
           this.throttleSelectRecipient(recipient);
