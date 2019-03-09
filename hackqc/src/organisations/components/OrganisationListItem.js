@@ -1,5 +1,8 @@
 import React from 'react';
-import { ListItem, ListItemText, Divider, ListItemSecondaryAction } from '@material-ui/core';
+import { ListItem, ListItemText, Divider, ListItemSecondaryAction, ListItemIcon } from '@material-ui/core';
+import HomeIcon from '@material-ui/icons/Home';
+import BedIcon from '@material-ui/icons/Hotel';
+import FoodIcon from '@material-ui/icons/Restaurant';
 
 export default function OrganisationListItem({ organisation, onPress }) {
   return (
@@ -10,7 +13,16 @@ export default function OrganisationListItem({ organisation, onPress }) {
         onClick={() => onPress(organisation)}
         style={{ backgroundColor: '#FFFFFF' }}
       >
-        <ListItemText primary={organisation.name} />
+        <div>
+          <ListItemText
+            primary={organisation.name}
+          />
+          <div>
+            <ListItemIcon><HomeIcon /></ListItemIcon>
+            <ListItemIcon><BedIcon /></ListItemIcon>
+            <ListItemIcon><FoodIcon /></ListItemIcon>
+          </div>
+        </div>
         <ListItemSecondaryAction>
           <span style={{ fontSize: 14, color: '#cccccc' }}>{organisation.distance}km</span>
         </ListItemSecondaryAction>
