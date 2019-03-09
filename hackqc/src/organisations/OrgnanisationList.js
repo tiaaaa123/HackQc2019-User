@@ -1,15 +1,33 @@
 import React from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import OrganisationListItem from './components/OrganisationListItem';
+import Client from '../Client';
 
 export default class OrgnanisationList extends React.Component {
 
-  state = {
-    redirectTo: undefined
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      redirectTo: undefined,
+      organisations: []
+    }
   }
 
-  selectOrganisation = (id) => {
-    this.setState({ redirectTo: id })
+  async componentDidMount() {
+    try {
+      const organisations = await Client.get('organizations', {})
+      console.log(organisations);
+      this.setState({ organisations: organisations })
+    } catch (e) {
+      console.log(e);
+    }
+
+  }
+
+  selectOrganisation = (reference) => {
+    console.log(reference);
+    this.setState({ redirectTo: reference })
   }
 
   render() {
@@ -21,11 +39,12 @@ export default class OrgnanisationList extends React.Component {
 
         <span>organisation list</span>
 
-        <OrganisationListItem id={5} name="Organisation A" onPress={this.selectOrganisation} />
-        <OrganisationListItem id={6} name="Organisation B" onPress={this.selectOrganisation} />
-        <OrganisationListItem id={7} name="Organisation C" onPress={this.selectOrganisation} />
-        <OrganisationListItem id={8} name="Organisation D" onPress={this.selectOrganisation} />
-        <OrganisationListItem id={9} name="Organisation E" onPress={this.selectOrganisation} />
+        {this.state.organisations.map(organisation => (
+          <OrganisationListItem
+            key={organisation.reference}
+            organisation={organisation}
+            onPress={this.selectOrganisation} />
+        ))}
       </div>
     )
   }

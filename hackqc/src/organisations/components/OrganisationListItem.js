@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function OrganisationListItem({ id, name, onPress }) {
+export default function OrganisationListItem({ organisation, onPress }) {
   return (
-    <div onClick={() => onPress(id)}>
-      <span>{name}</span>
+    <div onClick={() => onPress(organisation.reference)}>
+      <span>{organisation.name}</span>
     </div>
   )
 }
