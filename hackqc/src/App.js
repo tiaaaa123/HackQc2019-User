@@ -5,9 +5,9 @@ import AspectRatio from '@material-ui/icons/AspectRatio';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import ItemsCarousel from 'react-items-carousel';
-import './App.css';
 import OrganisationRouter from './organisations/OrganisationRouter';
 import ScannerRouter from './scan/ScanRouter';
+import './App.css';
 
 const styles = {
   content: {
@@ -34,6 +34,7 @@ class App extends Component {
           <ItemsCarousel
             activeItemIndex={this.state.tab}
             numberOfCards={1}
+            style={{ overflowY: 'scroll' }}
           >
             <ScannerRouter key={0} />
             <OrganisationRouter key={1} />
@@ -46,6 +47,9 @@ class App extends Component {
           value={this.state.tab}
           onChange={this.handleChange}
           showLabels
+          style={{
+            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+          }}
         >
           <BottomNavigationAction label="Scan" icon={<AspectRatio />} />
           <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />

@@ -1,5 +1,7 @@
 import React from 'react';
-import { List, ListItem, ListItemText, Divider, AppBar, Toolbar, Typography } from '@material-ui/core';
+import {
+  List, ListItem, ListItemText, Divider, AppBar, Toolbar, Typography,
+} from '@material-ui/core';
 
 const amounts = [
   {
@@ -38,7 +40,7 @@ export default class AmountList extends React.Component {
             <div key={amount.label}>
               <ListItem
                 button
-                alignItems={'flex-start'}
+                alignItems="flex-start"
                 onClick={() => { }}
                 style={{ backgroundColor: '#FFFFFF' }}
               >

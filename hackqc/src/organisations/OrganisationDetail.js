@@ -1,7 +1,7 @@
 import React from 'react';
 import isEqual from 'lodash.isequal';
 import {
-  Toolbar, Typography, AppBar, IconButton, Card, CardMedia, CardContent,
+  Toolbar, Typography, AppBar, IconButton, Card, CardMedia, CardContent, Button,
 } from '@material-ui/core';
 import BackButtonIcon from '@material-ui/icons/ArrowBack';
 import MapLocation from '../assets/organisationLocation.png';
@@ -52,7 +52,6 @@ export default class OrganisationDetail extends React.Component {
                 }}
               />
             </Card>
-            {/* <img src={MapLocation} alt="Location" style={{ width: '100%' }} /> */}
 
             <Card>
               <CardContent>
@@ -66,6 +65,14 @@ export default class OrganisationDetail extends React.Component {
                 <OrganisationServices organisation={organisation} />
               </CardContent>
             </Card>
+            <div style={{
+              marginTop: 30, marginBottom: 30, display: 'flex', alignContent: 'center', justifyContent: 'center',
+            }}
+            >
+              <Button variant="contained" size="large" color="primary">
+                Donner
+              </Button>
+            </div>
           </div>
         }
       </div>

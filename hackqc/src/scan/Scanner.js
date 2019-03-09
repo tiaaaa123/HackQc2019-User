@@ -25,7 +25,10 @@ function WhileScanEnabled({ handleScan, handleError }) {
 function WhileSeeking() {
   return (
     <div style={{ height: 'calc(600px - 74px)', position: 'relative' }}>
-      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} >
+      <div style={{
+        position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
+      }}
+      >
         <CircularProgress size={100} value={100} />
       </div>
     </div>
