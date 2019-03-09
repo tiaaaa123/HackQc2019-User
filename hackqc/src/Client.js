@@ -16,7 +16,31 @@ class Client {
         .catch(reject)
     })
 
-    return await response.json()
+    return await this.handleResponse(response)
+  }
+
+  async handleResponse(response: Response): Promise<any> {
+    const json = await this.parseContent(response);
+
+    if (!response.ok) {
+      const error = {
+        content: {
+          status: response.status,
+          message: JSON.stringify(json),
+        },
+      };
+      throw error.content;
+    }
+
+    return json;
+  }
+
+  async parseContent(response: Response): Promise<any> {
+    try {
+      return await response.json();
+    } catch (e) {
+      return {};
+    }
   }
 }
 
