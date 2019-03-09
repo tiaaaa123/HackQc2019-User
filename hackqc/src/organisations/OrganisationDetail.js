@@ -1,7 +1,8 @@
 import React from 'react'
 import isEqual from 'lodash.isequal'
-import { Toolbar, Typography, AppBar, IconButton } from '@material-ui/core';
+import { Toolbar, Typography, AppBar, IconButton, Card, CardMedia, CardContent } from '@material-ui/core';
 import BackButtonIcon from '@material-ui/icons/ArrowBack'
+import MapLocation from '../assets/organisationLocation.png'
 
 export default class OrganisationDetail extends React.Component {
 
@@ -38,7 +39,30 @@ export default class OrganisationDetail extends React.Component {
         </AppBar>
 
         {!!organisation &&
-          <h6>{organisation.name}</h6>
+          <div>
+            <Card>
+              <CardMedia
+                image={MapLocation}
+                title="Location"
+                style={{
+                  height: 0,
+                  paddingTop: '56.25%'
+                }}
+              />
+            </Card>
+            {/* <img src={MapLocation} alt="Location" style={{ width: '100%' }} /> */}
+
+            <Card>
+              <CardContent>
+                <Typography gutterBottom variant="h6" component="h2">
+                  Description
+          </Typography>
+                <Typography paragraph>
+                  {organisation.description}
+                </Typography>
+              </CardContent>
+            </Card>
+          </div>
         }
       </div>
     )

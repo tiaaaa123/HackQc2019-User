@@ -1,5 +1,4 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import OrganisationListItem from './components/OrganisationListItem';
@@ -10,42 +9,50 @@ const lists = [
   {
     reference: '234234',
     name: 'Patate',
-    description: 'lorem ipsum dolor si amet'
+    description: 'lorem ipsum dolor si amet,as fsmd,afsfsd,  am,sdfas d,fa,sdf,asm,dfasdm ,fas,mdf,asd,mfam,sdfm,as',
+    distance: 34,
   },
   {
     reference: '2345324',
     name: 'Chaude',
-    description: 'lorem ipsum dolor si amet'
+    description: 'lorem ipsum dolor si amet',
+    distance: 3.4,
   },
   {
     reference: '23',
     name: 'spaghetti',
-    description: 'lorem ipsum dolor si amet'
+    description: 'lorem ipsum dolor si amet',
+    distance: 1.4,
   },
   {
     reference: '5987',
     name: 'Jambon',
-    description: 'lorem ipsum dolor si amet'
+    description: 'lorem ipsum dolor si amet',
+    distance: 12.3,
   },
   {
     reference: '265783864234',
     name: 'Jambon',
-    description: 'lorem ipsum dolor si amet'
+    description: 'lorem ipsum dolor si amet',
+    distance: 12,
   },
   {
     reference: '5467',
     name: 'Jambon',
-    description: 'lorem ipsum dolor si amet'
+    description: 'lorem ipsum dolor si amet',
+    distance: 0.234,
   },
   {
     reference: '34567456',
     name: 'Jambon',
-    description: 'lorem ipsum dolor si amet'
+    description: 'lorem ipsum dolor si amet',
+    distance: 0.13,
   },
   {
     reference: '3456',
     name: 'Jambon',
-    description: 'lorem ipsum dolor si amet'
+    description: 'lorem ipsum dolor si amet',
+    distance: 123,
   }
 ]
 
@@ -119,13 +126,11 @@ class OrgnanisationList extends React.Component {
 
   async componentDidMount() {
     try {
-      console.log('getting organisations');
-      const organisations = await Client.get('organizations', {})
-      console.log(organisations);
+      // const organisations = await Client.get('organizations', {})
       // this.setState({ organisations: organisations })
-      this.setState({ organisations: lists })
+      const orderedList = lists.sort((a, b) => a.distance - b.distance)
+      this.setState({ organisations: orderedList })
     } catch (e) {
-      console.log(e);
       this.setState({ organisations: lists })
     }
 

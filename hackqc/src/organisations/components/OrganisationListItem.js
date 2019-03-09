@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListItem, ListItemText, Divider } from '@material-ui/core';
+import { ListItem, ListItemText, Divider, ListItemSecondaryAction } from '@material-ui/core';
 
 export default function OrganisationListItem({ organisation, onPress }) {
   return (
@@ -7,8 +7,13 @@ export default function OrganisationListItem({ organisation, onPress }) {
       <ListItem
         button
         alignItems={"flex-start"}
-        onClick={() => onPress(organisation)}>
-        <ListItemText>{organisation.name}</ListItemText>
+        onClick={() => onPress(organisation)}
+        style={{ backgroundColor: '#FFFFFF' }}
+      >
+        <ListItemText primary={organisation.name} />
+        <ListItemSecondaryAction>
+          <span style={{ fontSize: 14, color: '#cccccc' }}>{organisation.distance}km</span>
+        </ListItemSecondaryAction>
       </ListItem>
       <Divider />
     </React.Fragment>

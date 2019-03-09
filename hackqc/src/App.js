@@ -20,7 +20,7 @@ const styles = {
 class App extends Component {
 
   state = {
-    tab: 0,
+    tab: 1,
   };
 
   handleChange = (event, value) => {
