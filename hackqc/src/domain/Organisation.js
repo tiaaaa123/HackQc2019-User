@@ -16,7 +16,6 @@ class Organisation {
   }
 
   hasFood() {
-    console.log(this.services);
     return this.services.some((service: OrganisationService) => service.isFood());
   }
 

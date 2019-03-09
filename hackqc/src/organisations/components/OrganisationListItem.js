@@ -16,8 +16,6 @@ const styles = theme => ({
 });
 
 function OrganisationListItem({ organisation, onPress, classes }) {
-  console.log(organisation);
-  console.log(organisation.hasClothes(), organisation.hasFood(), organisation.hasShelter());
   return (
     <React.Fragment>
       <ListItem

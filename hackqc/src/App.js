@@ -8,6 +8,7 @@ import ItemsCarousel from 'react-items-carousel';
 import OrganisationRouter from './organisations/OrganisationRouter';
 import ScannerRouter from './scan/ScanRouter';
 import './App.css';
+import Client from './Client';
 
 const styles = {
   content: {
@@ -15,18 +16,37 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     overflowY: 'scroll',
+    position: 'relative',
   },
 };
 
 class App extends Component {
   state = {
     tab: 0,
+    sendingDonation: false,
   };
 
   handleChange = (event, value) => {
     this.setState({ tab: value });
   };
 
+  sendDonation = async (recipient, amount) => {
+    try {
+      this.setState({ sendingDonation: true });
+
+      const response = await Client.post('citizens/me/donations', {
+        to: recipient.reference,
+        amount: amount,
+      });
+      console.log(response);
+
+      this.setState({ sendingDonation: false });
+    } catch (e) {
+      this.setState({ sendingDonation: false });
+      console.log(e);
+      throw e;
+    }
+  }
 
   render() {
     return (
@@ -36,8 +56,16 @@ class App extends Component {
             activeItemIndex={this.state.tab}
             numberOfCards={1}
           >
-            <ScannerRouter key={0} />
-            <OrganisationRouter key={1} />
+            <ScannerRouter
+              key={0}
+              onSendingDonation={this.sendDonation}
+              sendingDonation={this.state.sendingDonation}
+            />
+            <OrganisationRouter
+              key={1}
+              onSendingDonation={this.sendDonation}
+              sendingDonation={this.state.sendingDonation}
+            />
             <div key={2}>thrid tab</div>
           </ItemsCarousel>
 

@@ -3,6 +3,7 @@ import ItemsCarousel from 'react-items-carousel';
 import OrgnanisationList from './OrgnanisationList';
 import OrganisationDetail from './OrganisationDetail';
 import AmountList from '../donation/AmountList';
+import ThankYouScreen from '../scan/ThankYouScreen';
 
 export default class OrganisationRouter extends React.Component {
   state = {
@@ -28,7 +29,21 @@ export default class OrganisationRouter extends React.Component {
           onGoBack={() => this.setState({ tab: 0, organisation: undefined })}
         />
 
-        <AmountList key={2} onGoBack={() => this.setState({ tab: 1 })} />
+        <AmountList
+          key={2}
+          onGoBack={() => this.setState({ tab: 1 })}
+          onAmountPress={async (amount) => {
+            try {
+              await this.props.onSendingDonation(this.state.organisation, amount);
+              this.setState({ tab: 3 });
+            } catch (e) {
+              console.log(e);
+            }
+          }}
+          sendingDonation={this.props.sendingDonation}
+        />
+
+        <ThankYouScreen key={3} onCloseDonation={() => this.setState({ tab: 0, organisation: undefined })} />
       </ItemsCarousel>
     );
   }

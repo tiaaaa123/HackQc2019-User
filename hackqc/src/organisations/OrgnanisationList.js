@@ -123,13 +123,10 @@ class OrgnanisationList extends React.Component {
   async fetchOrganisations() {
     try {
       const response = await Client.get('organizations');
-      console.log(response.organizations);
       const organisations = response.organizations.map(o => Organisation.parse(o));
-      console.log(organisations);
-      const orderedList = lists.map(Organisation.parse).sort((a, b) => a.distance - b.distance);
+      const orderedList = organisations.map(Organisation.parse).sort((a, b) => a.distance - b.distance);
       this.setState({ organisations: orderedList });
     } catch (e) {
-      console.log(e);
       this.setState({ organisations: lists });
     }
   }
