@@ -16,7 +16,7 @@ export default class ScannerRouter extends React.Component {
         numberOfCards={1}
       >
         <Scanner key={0} />
-        <AmountList key={1} />
+        <AmountList onGoBack={() => this.setState({ tab: 0 })} key={1} />
 
         <AmountList />
       </ItemsCarousel>
