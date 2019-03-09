@@ -3,9 +3,14 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import RestoreIcon from '@material-ui/icons/Restore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import OrgnanisationList from './organisations/OrgnanisationList';
+import OrganisationDetail from './organisations/OrganisationDetail';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import ItemsCarousel from 'react-items-carousel';
 import './App.css';
+import OrganisationRouter from './organisations/OrganisationRouter';
+import ScannerRouter from './scan/ScanRouter';
 
 const styles = {
   content: {
@@ -34,12 +39,13 @@ class App extends Component {
             activeItemIndex={this.state.tab}
             numberOfCards={1}
           >
-            <div key={0}>first tab</div>
-            <div key={1}>second tab</div>
+            <ScannerRouter key={0} />
+            <OrganisationRouter key={1} />
             <div key={2}>thrid tab</div>
           </ItemsCarousel>
 
         </div>
+
         <BottomNavigation
           value={this.state.tab}
           onChange={this.handleChange}
@@ -49,7 +55,7 @@ class App extends Component {
           <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
           <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
         </BottomNavigation>
-      </div >
+      </div>
     );
   }
 }
