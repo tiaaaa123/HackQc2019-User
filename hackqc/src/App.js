@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import AspectRatio from '@material-ui/icons/AspectRatio';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
+import PlaceIcon from '@material-ui/icons/Place';
+import SettingsIcon from '@material-ui/icons/Settings';
 import ItemsCarousel from 'react-items-carousel';
 import './App.css';
 import OrganisationRouter from './organisations/OrganisationRouter';
@@ -19,7 +19,7 @@ const styles = {
 
 class App extends Component {
   state = {
-    tab: 1,
+    tab: 0,
   };
 
   handleChange = (event, value) => {
@@ -48,8 +48,8 @@ class App extends Component {
           showLabels
         >
           <BottomNavigationAction label="Scan" icon={<AspectRatio />} />
-          <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-          <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+          <BottomNavigationAction label="Organizations" icon={<PlaceIcon />} />
+          <BottomNavigationAction label="Settings" icon={<SettingsIcon />} />
         </BottomNavigation>
       </div>
     );
