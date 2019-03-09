@@ -146,7 +146,7 @@ class OrgnanisationList extends React.Component {
         }
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="h4" color="inherit">Organizations</Typography>
+            <Typography variant="h6" color="inherit">Organizations</Typography>
           </Toolbar>
         </AppBar>
 
