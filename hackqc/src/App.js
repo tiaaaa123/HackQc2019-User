@@ -14,6 +14,7 @@ const styles = {
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
+    overflowY: 'scroll',
   },
 };
 
@@ -34,7 +35,6 @@ class App extends Component {
           <ItemsCarousel
             activeItemIndex={this.state.tab}
             numberOfCards={1}
-            style={{ overflowY: 'scroll' }}
           >
             <ScannerRouter key={0} />
             <OrganisationRouter key={1} />

@@ -138,7 +138,7 @@ class OrgnanisationList extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div style={{ flex: 1 }}>
+      <div style={{ flex: 1, overflowY: 'scroll' }}>
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" color="inherit">Organizations</Typography>

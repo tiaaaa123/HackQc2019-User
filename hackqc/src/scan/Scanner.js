@@ -1,9 +1,9 @@
 import React from 'react';
 import QrReader from 'react-qr-reader';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import Client from '../Client';
 import AmountList from '../donation/AmountList';
-import { AppBar, Toolbar, Typography } from '@material-ui/core';
 
 function WhileScanEnabled({ handleScan, handleError }) {
   return (

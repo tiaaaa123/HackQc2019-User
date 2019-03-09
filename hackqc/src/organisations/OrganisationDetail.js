@@ -28,7 +28,7 @@ export default class OrganisationDetail extends React.Component {
   render() {
     const { organisation } = this.state;
     return (
-      <div style={{ flex: 1 }}>
+      <div style={{ flex: 1, overflowY: 'scroll' }}>
         <AppBar position="static">
           <Toolbar style={{ paddingLeft: 0 }}>
             <IconButton color="inherit" onClick={this.props.onGoBack}>
@@ -69,7 +69,7 @@ export default class OrganisationDetail extends React.Component {
               marginTop: 30, marginBottom: 30, display: 'flex', alignContent: 'center', justifyContent: 'center',
             }}
             >
-              <Button variant="contained" size="large" color="primary">
+              <Button onClick={this.props.onDonate} variant="contained" size="large" color="primary">
                 Donner
               </Button>
             </div>

@@ -1,15 +1,25 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import ItemsCarousel from 'react-items-carousel';
+import AmountList from '../donation/AmountList';
 import Scanner from './Scanner';
 
+
 export default class ScannerRouter extends React.Component {
+  state = {
+    tab: 0,
+  }
+
   render() {
     return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={Scanner} />
-        </Switch>
-      </BrowserRouter>
+      <ItemsCarousel
+        activeItemIndex={this.state.tab}
+        numberOfCards={1}
+      >
+        <Scanner key={0} />
+        <AmountList key={1} />
+
+        <AmountList />
+      </ItemsCarousel>
     );
   }
 }

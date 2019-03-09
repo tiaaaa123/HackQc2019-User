@@ -1,7 +1,9 @@
 import React from 'react';
 import {
-  List, ListItem, ListItemText, Divider, AppBar, Toolbar, Typography,
+  List, ListItem, ListItemText, Divider, AppBar, Toolbar, Typography, IconButton,
 } from '@material-ui/core';
+import BackButtonIcon from '@material-ui/icons/ArrowBack';
+
 
 const amounts = [
   {
@@ -29,9 +31,12 @@ const amounts = [
 export default class AmountList extends React.Component {
   render() {
     return (
-      <React.Fragment>
+      <div style={{ flex: 1, overflowY: 'scroll' }}>
         <AppBar position="static">
-          <Toolbar>
+          <Toolbar style={{ paddingLeft: 0 }}>
+            <IconButton color="inherit" onClick={this.props.onGoBack}>
+              <BackButtonIcon color="inherit" />
+            </IconButton>
             <Typography variant="h6" color="inherit">How much will you donate?</Typography>
           </Toolbar>
         </AppBar>
@@ -50,7 +55,7 @@ export default class AmountList extends React.Component {
             </div>
           ))}
         </List>
-      </React.Fragment>
+      </div>
     );
   }
 }
