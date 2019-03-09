@@ -4,6 +4,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import Client from '../Client';
 import AmountList from '../donation/AmountList';
+import ItemsCarousel from 'react-items-carousel';
 
 function WhileScanEnabled({ handleScan, handleError }) {
   return (
@@ -45,7 +46,7 @@ export default class Scanner extends React.Component {
   state = {
     result: 'No result',
     lookingForEntity: false,
-    entityFound: false,
+    tab: 0,
   }
 
   handleScan = async (data) => {
@@ -54,14 +55,28 @@ export default class Scanner extends React.Component {
       const splittedData = data.split('/');
       const entityUUID = splittedData[splittedData.length - 1];
       const recipient = await Client.get(`recipients/${entityUUID}?lon=0&lat=0`, {});
-      setTimeout(() => {
-        this.setState({ lookingForEntity: false, entityFound: true });
-      }, 400);
+      if (recipient.type === 'CITIZEN_IN_NEEDS') {
+        setTimeout(() => {
+          this.setState({ lookingForEntity: false, tab: 1 });
+        }, 400);
+      }
     }
   }
 
   handleError = (err) => {
     console.error(err);
+  }
+
+  success = (amount) => {
+    this.setState({
+      tab: 0
+    })
+  }
+
+  goBack = () => {
+    this.setState({
+      tab: 0,
+    })
   }
 
   render() {
@@ -72,13 +87,17 @@ export default class Scanner extends React.Component {
     if (this.state.lookingForEntity) {
       ComponentToRender = WhileSeeking;
     }
-    if (this.state.entityFound) {
-      ComponentToRender = AmountList;
-    }
 
     return (
       <React.Fragment>
-        <ComponentToRender />
+        <ItemsCarousel
+          activeItemIndex={this.state.tab}
+          numberOfCards={1}
+        >
+            <ComponentToRender key={0} />
+            <AmountList key={1} onGoBack={this.goBack} onSuccess={this.success}/>
+            <div key={2}></div>
+        </ItemsCarousel>
       </React.Fragment>
     );
   }
