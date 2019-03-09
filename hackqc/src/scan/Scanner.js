@@ -3,10 +3,16 @@ import QrReader from 'react-qr-reader';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Client from '../Client';
 import AmountList from '../donation/AmountList';
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
 
 function WhileScanEnabled({ handleScan, handleError }) {
   return (
     <React.Fragment>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" color="inherit">Scan a QR code</Typography>
+        </Toolbar>
+      </AppBar>
       <QrReader
         delay={300}
         onError={handleError}
@@ -50,7 +56,7 @@ export default class Scanner extends React.Component {
       const recipient = await Client.get(`recipients/${entityUUID}?lon=0&lat=0`, {});
       setTimeout(() => {
         this.setState({ lookingForEntity: false, entityFound: true });
-      }, 1000);
+      }, 400);
     }
   }
 
