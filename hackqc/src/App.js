@@ -3,7 +3,7 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import AspectRatio from '@material-ui/icons/AspectRatio';
 import PlaceIcon from '@material-ui/icons/Place';
-import SettingsIcon from '@material-ui/icons/Settings';
+import AccountIcon from '@material-ui/icons/AccountBox';
 import ItemsCarousel from 'react-items-carousel';
 import './App.css';
 import OrganisationRouter from './organisations/OrganisationRouter';
@@ -49,7 +49,7 @@ class App extends Component {
         >
           <BottomNavigationAction label="Scan" icon={<AspectRatio />} />
           <BottomNavigationAction label="Organizations" icon={<PlaceIcon />} />
-          <BottomNavigationAction label="Settings" icon={<SettingsIcon />} />
+          <BottomNavigationAction label="Account" icon={<AccountIcon />} />
         </BottomNavigation>
       </div>
     );
