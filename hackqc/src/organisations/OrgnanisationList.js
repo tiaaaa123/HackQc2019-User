@@ -1,14 +1,14 @@
-import React from 'react'
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
+import { List, Divider, AppBar, Toolbar, Typography, InputBase } from '@material-ui/core';
 import OrganisationListItem from './components/OrganisationListItem';
 import Client from '../Client';
-import { List, Divider, AppBar, Toolbar, Typography, InputBase } from '@material-ui/core';
 
 const lists = [
   {
     reference: '234234',
-    name: 'Patate',
+    name: 'Patatea Chaude dans un four à 350 degrée et laisser pendant 30 min',
     description: 'lorem ipsum dolor si amet,as fsmd,afsfsd,  am,sdfas d,fa,sdf,asm,dfasdm ,fas,mdf,asd,mfam,sdfm,as',
     distance: 34,
   },
@@ -53,8 +53,8 @@ const lists = [
     name: 'Jambon',
     description: 'lorem ipsum dolor si amet',
     distance: 123,
-  }
-]
+  },
+];
 
 const styles = theme => ({
   root: {
@@ -114,30 +114,30 @@ const styles = theme => ({
 });
 
 class OrgnanisationList extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
       redirectTo: undefined,
-      organisations: []
-    }
+      organisations: [],
+    };
   }
 
-  async componentDidMount() {
-    try {
-      // const organisations = await Client.get('organizations', {})
-      // this.setState({ organisations: organisations })
-      const orderedList = lists.sort((a, b) => a.distance - b.distance)
-      this.setState({ organisations: orderedList })
-    } catch (e) {
-      this.setState({ organisations: lists })
-    }
-
+  componentDidMount() {
+    this.fetchOrganisations();
   }
 
   selectOrganisation = (organisation) => {
     this.props.onOrganisationSelected(organisation);
+  }
+
+  async fetchOrganisations() {
+    try {
+      const orderedList = lists.sort((a, b) => a.distance - b.distance);
+      this.setState({ organisations: orderedList });
+    } catch (e) {
+      this.setState({ organisations: lists });
+    }
   }
 
   render() {
@@ -170,11 +170,12 @@ class OrgnanisationList extends React.Component {
             <OrganisationListItem
               key={organisation.reference}
               organisation={organisation}
-              onPress={this.selectOrganisation} />
+              onPress={this.selectOrganisation}
+            />
           ))}
         </List>
       </div>
-    )
+    );
   }
 }
 

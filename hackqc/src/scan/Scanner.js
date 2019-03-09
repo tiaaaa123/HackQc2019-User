@@ -1,7 +1,7 @@
 import React from 'react';
-import QrReader from 'react-qr-reader'
-import Client from '../Client';
+import QrReader from 'react-qr-reader';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Client from '../Client';
 
 function WhileScanEnabled({ handleScan, handleError }) {
   return (
@@ -13,12 +13,12 @@ function WhileScanEnabled({ handleScan, handleError }) {
         style={{ width: '100%' }}
       />
       <p
-        style={{padding: '20px 10px'}}
+        style={{ padding: '20px 10px' }}
       >
         To donate to this person or organism, please place the QR code within the red square.
       </p>
     </React.Fragment>
-  )
+  );
 }
 
 export default class Scanner extends React.Component {
@@ -28,37 +28,37 @@ export default class Scanner extends React.Component {
     entityFound: false,
   }
 
-  handleScan = async data => {
+  handleScan = async (data) => {
     if (data && (typeof data === 'string' || data instanceof String)) {
-      await this.setState({ lookingForEntity: true })
-      const splittedData = data.split('/')
-      const entityUUID = splittedData[splittedData.length - 1]
-      const recipient = await Client.get(`recipients/${entityUUID}`, {})
+      await this.setState({ lookingForEntity: true });
+      const splittedData = data.split('/');
+      const entityUUID = splittedData[splittedData.length - 1];
+      const recipient = await Client.get(`recipients/${entityUUID}`, {});
       setTimeout(() => {
-        this.setState({ lookingForEntity: false, entityFound: true })
-      }, 1000)
+        this.setState({ lookingForEntity: false, entityFound: true });
+      }, 1000);
     }
   }
 
-  handleError = err => {
-    console.error(err)
+  handleError = (err) => {
+    console.error(err);
   }
-  
+
   render() {
     let ComponentToRender = WhileScanEnabled.bind(null, {
-      handleScan: this.handleScan, handleError: this.handleError
+      handleScan: this.handleScan, handleError: this.handleError,
     });
 
     if (this.state.lookingForEntity) {
       ComponentToRender = () => {
         return (
           <div style={{ height: 'calc(600px - 74px)', position: 'relative' }}>
-            <div style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}} >
+            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} >
               <CircularProgress size={100} value={100} />
             </div>
           </div>
-        )
-      }
+        );
+      };
     }
     if (this.state.entityFound) {
       ComponentToRender = () => {
@@ -66,14 +66,14 @@ export default class Scanner extends React.Component {
           <div>
             Entity found!
           </div>
-        )
-      }
+        );
+      };
     }
 
     return (
       <React.Fragment>
         <ComponentToRender />
       </React.Fragment>
-    )
+    );
   }
 }

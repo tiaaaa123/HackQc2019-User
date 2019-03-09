@@ -1,22 +1,21 @@
 
-const URL = 'https://9o0kewwo4l.execute-api.ca-central-1.amazonaws.com/api/'
+const URL = 'https://9o0kewwo4l.execute-api.ca-central-1.amazonaws.com/api/';
 
 class Client {
-
   async get(endpoint, options) {
-    return await this.sendRequest('GET', endpoint)
+    return await this.sendRequest('GET', endpoint);
   }
 
   async sendRequest(method, endpoint) {
-    const options = { method: method, headers: { 'Content-Type': 'application/json' } }
+    const options = { method: method, headers: { 'Content-Type': 'application/json' } };
 
     const response = await new Promise((resolve, reject) => {
       fetch(URL + endpoint, options)
-        .then((response) => resolve(response))
-        .catch(reject)
-    })
+        .then(resolve)
+        .catch(reject);
+    });
 
-    return await this.handleResponse(response)
+    return await this.handleResponse(response);
   }
 
   async handleResponse(response: Response): Promise<any> {
@@ -44,4 +43,4 @@ class Client {
   }
 }
 
-export default new Client()
+export default new Client();

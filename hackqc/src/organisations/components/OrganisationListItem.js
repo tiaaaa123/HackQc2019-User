@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { ListItem, ListItemText, Divider, ListItemSecondaryAction } from '@material-ui/core';
 
 export default function OrganisationListItem({ organisation, onPress }) {
@@ -6,7 +6,7 @@ export default function OrganisationListItem({ organisation, onPress }) {
     <React.Fragment>
       <ListItem
         button
-        alignItems={"flex-start"}
+        alignItems={'flex-start'}
         onClick={() => onPress(organisation)}
         style={{ backgroundColor: '#FFFFFF' }}
       >
@@ -17,5 +17,5 @@ export default function OrganisationListItem({ organisation, onPress }) {
       </ListItem>
       <Divider />
     </React.Fragment>
-  )
+  );
 }

@@ -1,10 +1,9 @@
-import React from 'react'
+import React from 'react';
 import ItemsCarousel from 'react-items-carousel';
 import OrgnanisationList from './OrgnanisationList';
-import OrganisationDetail from './OrganisationDetail'
+import OrganisationDetail from './OrganisationDetail';
 
 export default class OrganisationRouter extends React.Component {
-
   state = {
     tab: 0,
     organisation: undefined,
@@ -17,8 +16,9 @@ export default class OrganisationRouter extends React.Component {
         numberOfCards={1}
       >
         <OrgnanisationList
-          onOrganisationSelected={(organisation) => this.setState({ tab: 1, organisation: organisation })}
-          key={0} />
+          onOrganisationSelected={organisation => this.setState({ tab: 1, organisation: organisation })}
+          key={0}
+        />
 
         <OrganisationDetail
           organisation={this.state.organisation}
@@ -26,6 +26,6 @@ export default class OrganisationRouter extends React.Component {
           onGoBack={() => this.setState({ tab: 0, organisation: undefined })}
         />
       </ItemsCarousel>
-    )
+    );
   }
 }

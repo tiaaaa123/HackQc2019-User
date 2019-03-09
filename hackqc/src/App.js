@@ -14,11 +14,10 @@ const styles = {
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
-  }
-}
+  },
+};
 
 class App extends Component {
-
   state = {
     tab: 1,
   };

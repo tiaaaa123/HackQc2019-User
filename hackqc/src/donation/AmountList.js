@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 export default class AmountList extends React.Component {
-  render () {
+  render() {
     return (
       <div>Amount list</div>
-    )
+    );
   }
 }
