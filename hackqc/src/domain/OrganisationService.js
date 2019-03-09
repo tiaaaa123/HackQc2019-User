@@ -1,8 +1,24 @@
 
-// class OrganisationService {
-//   constructor({ type }) {
-//     this.type = type;
-//   }
-// }
+export type ServiceType = 'SHELTER' | 'FOOD' | 'CLOTHES';
 
-// export default OrganisationService;
+class OrganisationService {
+  type: ServiceType;
+
+  constructor({ type }) {
+    this.type = type;
+  }
+
+  isShelter() {
+    return this.type === 'SHELTER';
+  }
+
+  isFood() {
+    return this.type === 'FOOD';
+  }
+
+  isClothes() {
+    return this.type === 'CLOTHES';
+  }
+}
+
+export default OrganisationService;

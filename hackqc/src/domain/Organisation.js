@@ -1,12 +1,27 @@
-// import OrganisationService from './OrganisationService';
+import OrganisationService from './OrganisationService';
 
 class Organisation {
-  constructor({ reference, name, description, services, distance }) {
+  constructor({
+    reference, name, description, services, distance,
+  }) {
     this.reference = reference;
     this.name = name;
     this.description = description;
-    this.services = services;
+    this.services = services ? services.map(s => new OrganisationService(s)) : [];
     this.distance = distance || parseFloat(Math.random() * 10).toFixed(1);
+  }
+
+  hasShelter() {
+    return this.services.some((service: OrganisationService) => service.isShelter());
+  }
+
+  hasFood() {
+    console.log(this.services);
+    return this.services.some((service: OrganisationService) => service.isFood());
+  }
+
+  hasClothes() {
+    return this.services.some((service: OrganisationService) => service.isClothes());
   }
 }
 

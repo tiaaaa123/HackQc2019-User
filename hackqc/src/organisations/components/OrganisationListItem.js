@@ -1,15 +1,28 @@
 import React from 'react';
-import { ListItem, ListItemText, Divider, ListItemSecondaryAction, ListItemIcon } from '@material-ui/core';
-import HomeIcon from '@material-ui/icons/Home';
-import BedIcon from '@material-ui/icons/Hotel';
-import FoodIcon from '@material-ui/icons/Restaurant';
+import {
+  ListItem, ListItemText, Divider, ListItemSecondaryAction, withStyles,
+} from '@material-ui/core';
+import OrganisationServices from './OrganisationSerivces';
 
-export default function OrganisationListItem({ organisation, onPress }) {
+const styles = theme => ({
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+  },
+  icon: {
+    margin: 0,
+  },
+});
+
+function OrganisationListItem({ organisation, onPress, classes }) {
+  console.log(organisation);
+  console.log(organisation.hasClothes(), organisation.hasFood(), organisation.hasShelter());
   return (
     <React.Fragment>
       <ListItem
         button
-        alignItems={'flex-start'}
+        alignItems="flex-start"
         onClick={() => onPress(organisation)}
         style={{ backgroundColor: '#FFFFFF' }}
       >
@@ -17,17 +30,18 @@ export default function OrganisationListItem({ organisation, onPress }) {
           <ListItemText
             primary={organisation.name}
           />
-          <div>
-            <ListItemIcon><HomeIcon /></ListItemIcon>
-            <ListItemIcon><BedIcon /></ListItemIcon>
-            <ListItemIcon><FoodIcon /></ListItemIcon>
-          </div>
+          <OrganisationServices hideLabel organisation={organisation} />
         </div>
         <ListItemSecondaryAction>
-          <span style={{ fontSize: 14, color: '#cccccc' }}>{organisation.distance}km</span>
+          <span style={{ fontSize: 14, color: '#cccccc' }}>
+            {organisation.distance}
+            km
+          </span>
         </ListItemSecondaryAction>
       </ListItem>
       <Divider />
     </React.Fragment>
   );
 }
+
+export default withStyles(styles)(OrganisationListItem);

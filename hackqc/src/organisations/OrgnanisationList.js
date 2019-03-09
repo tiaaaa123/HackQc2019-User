@@ -1,7 +1,9 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
-import { List, Divider, AppBar, Toolbar, Typography, InputBase } from '@material-ui/core';
+import {
+  List, Divider, AppBar, Toolbar, Typography, InputBase,
+} from '@material-ui/core';
 import OrganisationListItem from './components/OrganisationListItem';
 import Client from '../Client';
 import Organisation from '../domain/Organisation';
@@ -11,16 +13,28 @@ const lists = [
     reference: '234234',
     name: 'Patatea Chaude dans un four à 350 degrée et laisser pendant 30 min',
     description: 'lorem ipsum dolor si amet,as fsmd,afsfsd,  am,sdfas d,fa,sdf,asm,dfasdm ,fas,mdf,asd,mfam,sdfm,as',
+    services: [
+      { type: 'SHELTER' },
+    ],
   },
   {
     reference: '2345324',
     name: 'Chaude',
     description: 'lorem ipsum dolor si amet',
+    services: [
+      { type: 'SHELTER' },
+      { type: 'CLOTHES' },
+      { type: 'FOOD' },
+    ],
   },
   {
     reference: '23',
     name: 'spaghetti',
     description: 'lorem ipsum dolor si amet',
+    services: [
+      { type: 'SHELTER' },
+      { type: 'CLOTHES' },
+    ],
   },
   {
     reference: '3456',
@@ -91,7 +105,6 @@ class OrgnanisationList extends React.Component {
     super(props);
 
     this.state = {
-      redirectTo: undefined,
       organisations: [],
     };
   }
@@ -107,8 +120,8 @@ class OrgnanisationList extends React.Component {
   async fetchOrganisations() {
     try {
       const response = await Client.get('organizations');
-      console.log(response);
-      const organisations = response.organizations.map(Organisation.parse);
+      console.log(response.organizations);
+      const organisations = response.organizations.map(o => Organisation.parse(o));
       console.log(organisations);
       const orderedList = lists.map(Organisation.parse).sort((a, b) => a.distance - b.distance);
       this.setState({ organisations: orderedList });

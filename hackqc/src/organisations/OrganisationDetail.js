@@ -1,8 +1,11 @@
 import React from 'react';
 import isEqual from 'lodash.isequal';
-import { Toolbar, Typography, AppBar, IconButton, Card, CardMedia, CardContent } from '@material-ui/core';
+import {
+  Toolbar, Typography, AppBar, IconButton, Card, CardMedia, CardContent,
+} from '@material-ui/core';
 import BackButtonIcon from '@material-ui/icons/ArrowBack';
 import MapLocation from '../assets/organisationLocation.png';
+import OrganisationServices from './components/OrganisationSerivces';
 
 export default class OrganisationDetail extends React.Component {
   static getDerivedStateFromProps(props, state) {
@@ -28,7 +31,7 @@ export default class OrganisationDetail extends React.Component {
       <div style={{ flex: 1 }}>
         <AppBar position="static">
           <Toolbar style={{ paddingLeft: 0 }}>
-            <IconButton color="inherit" onClick={this.props.onGoBack} >
+            <IconButton color="inherit" onClick={this.props.onGoBack}>
               <BackButtonIcon color="inherit" />
             </IconButton>
             {organisation &&
@@ -59,6 +62,8 @@ export default class OrganisationDetail extends React.Component {
                 <Typography paragraph>
                   {organisation.description}
                 </Typography>
+
+                <OrganisationServices organisation={organisation} />
               </CardContent>
             </Card>
           </div>
