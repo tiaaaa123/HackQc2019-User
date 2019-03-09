@@ -2,6 +2,7 @@ import React from 'react';
 import QrReader from 'react-qr-reader'
 import Client from '../Client';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import AmountList from '../donation/AmountList';
 
 function WhileScanEnabled({ handleScan, handleError }) {
   return (
@@ -21,6 +22,16 @@ function WhileScanEnabled({ handleScan, handleError }) {
   )
 }
 
+function WhileSeeking() {
+  return (
+    <div style={{ height: 'calc(600px - 74px)', position: 'relative' }}>
+      <div style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}} >
+        <CircularProgress size={100} value={100} />
+      </div>
+    </div>
+  )
+}
+
 export default class Scanner extends React.Component {
   state = {
     result: 'No result',
@@ -33,7 +44,7 @@ export default class Scanner extends React.Component {
       await this.setState({ lookingForEntity: true })
       const splittedData = data.split('/')
       const entityUUID = splittedData[splittedData.length - 1]
-      const recipient = await Client.get(`recipients/${entityUUID}`, {})
+      const recipient = await Client.get(`recipients/${entityUUID}?lon=0&lat=0`, {})
       setTimeout(() => {
         this.setState({ lookingForEntity: false, entityFound: true })
       }, 1000)
@@ -50,24 +61,10 @@ export default class Scanner extends React.Component {
     });
 
     if (this.state.lookingForEntity) {
-      ComponentToRender = () => {
-        return (
-          <div style={{ height: 'calc(600px - 74px)', position: 'relative' }}>
-            <div style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}} >
-              <CircularProgress size={100} value={100} />
-            </div>
-          </div>
-        )
-      }
+      ComponentToRender = WhileSeeking
     }
     if (this.state.entityFound) {
-      ComponentToRender = () => {
-        return (
-          <div>
-            Entity found!
-          </div>
-        )
-      }
+      ComponentToRender = AmountList
     }
 
     return (
