@@ -26,12 +26,14 @@ export default class OrganisationDetail extends React.Component {
     const { organisation } = this.state
     return (
       <div style={{ flex: 1 }}>
-        <AppBar position="static" style={{}}>
-          <Toolbar>
+        <AppBar position="static">
+          <Toolbar style={{ paddingLeft: 0 }}>
             <IconButton color="inherit" onClick={this.props.onGoBack} >
               <BackButtonIcon color="inherit" />
             </IconButton>
-            <Typography variant="h6" color="inherit">Organizations</Typography>
+            {organisation &&
+              <Typography variant="h6" color="inherit">{organisation.name}</Typography>
+            }
           </Toolbar>
         </AppBar>
 
