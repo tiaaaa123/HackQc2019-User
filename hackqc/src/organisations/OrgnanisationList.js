@@ -131,9 +131,8 @@ class OrgnanisationList extends React.Component {
 
   }
 
-  selectOrganisation = (reference) => {
-    console.log(reference);
-    this.setState({ redirectTo: reference })
+  selectOrganisation = (organisation) => {
+    this.props.onOrganisationSelected(organisation);
   }
 
   render() {
@@ -141,9 +140,6 @@ class OrgnanisationList extends React.Component {
 
     return (
       <div style={{ flex: 1 }}>
-        {this.state.redirectTo &&
-          <Redirect to={`/${this.state.redirectTo}`} />
-        }
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" color="inherit">Organizations</Typography>

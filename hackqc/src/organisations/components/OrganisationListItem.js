@@ -7,7 +7,7 @@ export default function OrganisationListItem({ organisation, onPress }) {
       <ListItem
         button
         alignItems={"flex-start"}
-        onClick={() => onPress(organisation.reference)}>
+        onClick={() => onPress(organisation)}>
         <ListItemText>{organisation.name}</ListItemText>
       </ListItem>
       <Divider />
