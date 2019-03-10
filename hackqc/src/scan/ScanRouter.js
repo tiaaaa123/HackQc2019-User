@@ -29,7 +29,11 @@ export default class ScannerRouter extends React.Component {
         activeItemIndex={this.state.tab}
         numberOfCards={1}
       >
-        <Scanner key={0} onRecipientFound={recipient => this.setState({ tab: 1, recipient: recipient })} />
+        <Scanner
+          key={0}
+          onRecipientFound={recipient => this.setState({ tab: 1, recipient: recipient })}
+          type={this.props.type}
+        />
         <AmountList
           key={1}
           onGoBack={() => this.setState({ tab: 0 })}

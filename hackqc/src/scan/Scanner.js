@@ -5,6 +5,11 @@ import throttle from 'lodash.throttle';
 import Client from '../Client';
 import OverlaySpinner from '../components/OverlaySpinner';
 
+const instructions = {
+  citizens: 'Pour faire un don à cette personne ou à cet organisme, veuillez placer le code QR dans le carré rouge.',
+  organisations: 'Pour effectuer un paiement, veuillez placer le code QR dans le carré rouge.',
+};
+
 class Scanner extends React.Component {
   state = {
     lookingForEntity: false,
@@ -49,11 +54,11 @@ class Scanner extends React.Component {
           onScan={this.handleScan}
           style={{ width: '100%' }}
         />
-        <p
+        <Typography align="center"
           style={{ padding: '20px 10px' }}
         >
-          To donate to this person or organism, please place the QR code within the red square.
-        </p>
+          {instructions[this.props.type]}
+        </Typography>
 
         <OverlaySpinner open={this.state.lookingForEntity} />
       </div>
