@@ -38,7 +38,7 @@ export default class AccountScreen extends React.Component {
     try {
       const user = await Client.get('organizations/me');
       const { transactions } = await Client.get('organizations/me/transactions');
-      const sortedTransactions = sortBy(transactions, ['donated_at']).reverse().slice(0, 9);
+      const sortedTransactions = sortBy(transactions, ['redeemed_at']).reverse().slice(0, 9);
       this.setState({ user, donations: sortedTransactions });
     } catch (e) {
       console.log(e);
