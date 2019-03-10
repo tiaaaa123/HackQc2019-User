@@ -21,7 +21,13 @@ export default class AccountScreen extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchAccount();
+    this.apiCalls();
+  }
+
+  componentDidUpdate(prevProps, nextProps) {
+    if (prevProps.rendered !== nextProps.rendered) {
+      this.apiCalls();
+    }
   }
 
   fetchAccount = async () => {
@@ -32,6 +38,25 @@ export default class AccountScreen extends React.Component {
       this.setState({ user, donations: sortedDonations });
     } catch (e) {
       console.log(e);
+    }
+  }
+
+  fetchOrganization = async () => {
+    try {
+      const user = await Client.get('organizations/me');
+      const { transactions } = await Client.get('organizations/me/transactions');
+      const sortedTransactions = sortBy(transactions, ['redeemed_at']).reverse().slice(0, 9);
+      this.setState({ user, donations: sortedTransactions });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  apiCalls = () => {
+    if (this.props.type === 'organisations') {
+      this.fetchOrganization();
+    } else {
+      this.fetchAccount();
     }
   }
 
@@ -56,10 +81,10 @@ export default class AccountScreen extends React.Component {
                 alignItems="flex-start"
                 style={{ backgroundColor: '#FFFFFF' }}
               >
-                <ListItemText primary={`${donation.amount}$`} />
+                <ListItemText primary={`${donation.amount.toFixed(2)}$`} />
                 <ListItemSecondaryAction style={{ marginRight: 10 }}>
                   <span style={{ fontSize: 14, color: '#cccccc' }}>
-                    {(new Date(donation.donated_at)).toLocaleString()}
+                    {(new Date(donation[this.props.type === 'organisations' ? 'redeemed_at' : 'donated_at'])).toLocaleString()}
                   </span>
                 </ListItemSecondaryAction>
               </ListItem>

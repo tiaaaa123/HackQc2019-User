@@ -67,7 +67,7 @@ class StaffRouting extends Component {
               onClosingTransaction={() => this.setState({ transaction: undefined })}
               ref={item => this.scannerRoute = item}
             />
-            <AccountScreen key={2} type="organisations" />
+            <AccountScreen key={2} type="organisations" rendered={this.state.tab === 2} />
           </ItemsCarousel>
 
         </div>
