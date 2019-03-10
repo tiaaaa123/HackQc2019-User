@@ -30,6 +30,7 @@ const amounts = [
 
 export default class AmountList extends React.Component {
   render() {
+    console.log(this.props.title);
     return (
       <div style={{ flex: 1, overflowY: 'scroll' }} key={0}>
         <AppBar position="static">
@@ -37,7 +38,7 @@ export default class AmountList extends React.Component {
             <IconButton color="inherit" onClick={this.props.onGoBack}>
               <BackButtonIcon color="inherit" />
             </IconButton>
-            <Typography variant="h6" color="inherit">Combien voulez-vous donner?</Typography>
+            <Typography variant="h6" color="inherit">{this.props.title}</Typography>
           </Toolbar>
         </AppBar>
 

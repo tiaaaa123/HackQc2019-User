@@ -1,0 +1,86 @@
+import React, { Component } from 'react';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import AspectRatio from '@material-ui/icons/AspectRatio';
+import PlaceIcon from '@material-ui/icons/Place';
+import AccountIcon from '@material-ui/icons/AccountBox';
+import ItemsCarousel from 'react-items-carousel';
+import OrganisationRouter from './organisations/OrganisationRouter';
+import ScannerRouter from './scan/ScanRouter';
+import './App.css';
+import Client from './Client';
+import AccountScreen from './account/AccountScreen';
+
+const styles = {
+  content: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    overflowY: 'scroll',
+    position: 'relative',
+  },
+};
+
+class StaffRouting extends Component {
+  state = {
+    tab: 0,
+    sendingDonation: false,
+  };
+
+  handleChange = (event, value) => {
+    this.setState({ tab: value });
+  };
+
+  sendDonation = async (recipient, amount) => {
+    try {
+      this.setState({ sendingDonation: true });
+
+      const response = await Client.post('organizations/me/redeem', {
+        from_recipient: recipient.reference,
+        amount: amount,
+        service: 'FOOD',
+      });
+
+      this.setState({ sendingDonation: false });
+    } catch (e) {
+      this.setState({ sendingDonation: false });
+      throw e;
+    }
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <div style={styles.content}>
+          <ItemsCarousel
+            activeItemIndex={this.state.tab}
+            numberOfCards={1}
+          >
+            <ScannerRouter
+              key={0}
+              onSendingDonation={this.sendDonation}
+              sendingDonation={this.state.sendingDonation}
+              type="organisations"
+            />
+            <AccountScreen key={2} type="organisations" />
+          </ItemsCarousel>
+
+        </div>
+
+        <BottomNavigation
+          value={this.state.tab}
+          onChange={this.handleChange}
+          showLabels
+          style={{
+            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+          }}
+        >
+          <BottomNavigationAction label="Scan" icon={<AspectRatio />} />
+          <BottomNavigationAction label="Organisation" icon={<AccountIcon />} />
+        </BottomNavigation>
+      </div>
+    );
+  }
+}
+
+export default StaffRouting;

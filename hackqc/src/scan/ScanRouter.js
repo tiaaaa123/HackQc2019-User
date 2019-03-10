@@ -4,6 +4,11 @@ import AmountList from '../donation/AmountList';
 import Scanner from './Scanner';
 import ThankYouScreen from './ThankYouScreen';
 
+const title = {
+  citizens: 'Combien voulez-vous donner?',
+  organisations: 'Quel prix est le produit?',
+};
+
 export default class ScannerRouter extends React.Component {
   constructor(props) {
     super(props);
@@ -15,6 +20,8 @@ export default class ScannerRouter extends React.Component {
   }
 
   render() {
+    console.log(title);
+    console.log(title[this.props.type]);
     return (
       <ItemsCarousel
         activeItemIndex={this.state.tab}
@@ -33,6 +40,7 @@ export default class ScannerRouter extends React.Component {
             }
           }}
           sendingDonation={this.props.sendingDonation}
+          title={title[this.props.type]}
         />
 
         <ThankYouScreen key={2} onCloseDonation={() => this.setState({ tab: 0, recipient: undefined })} />
