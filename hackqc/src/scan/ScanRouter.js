@@ -20,8 +20,6 @@ export default class ScannerRouter extends React.Component {
   }
 
   render() {
-    console.log(title);
-    console.log(title[this.props.type]);
     return (
       <ItemsCarousel
         activeItemIndex={this.state.tab}
@@ -33,6 +31,7 @@ export default class ScannerRouter extends React.Component {
           onGoBack={() => this.setState({ tab: 0 })}
           onAmountPress={async (amount) => {
             try {
+              console.log('amount press');
               await this.props.onSendingDonation(this.state.recipient, amount);
               this.setState({ tab: 2 });
             } catch (e) {
@@ -43,7 +42,14 @@ export default class ScannerRouter extends React.Component {
           title={title[this.props.type]}
         />
 
-        <ThankYouScreen key={2} onCloseDonation={() => this.setState({ tab: 0, recipient: undefined })} />
+        <ThankYouScreen
+          key={2}
+          onCloseDonation={() => {
+            this.setState({ tab: 0, recipient: undefined });
+            this.props.onClosingTransaction();
+          }}
+          transaction={this.props.transaction}
+        />
       </ItemsCarousel>
     );
   }

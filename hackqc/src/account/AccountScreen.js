@@ -17,7 +17,6 @@ export default class AccountScreen extends React.Component {
   fetchAccount = async () => {
     try {
       const response = await Client.get('citizens/me');
-      console.log(response);
     } catch (e) {
       console.log(e);
     }

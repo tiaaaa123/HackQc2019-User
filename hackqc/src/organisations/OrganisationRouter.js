@@ -41,9 +41,17 @@ export default class OrganisationRouter extends React.Component {
             }
           }}
           sendingDonation={this.props.sendingDonation}
+          title="Combien voulez-vous donner?"
         />
 
-        <ThankYouScreen key={3} onCloseDonation={() => this.setState({ tab: 0, organisation: undefined })} />
+        <ThankYouScreen
+          key={3}
+          onCloseDonation={() => {
+            this.setState({ tab: 0, organisation: undefined });
+            this.props.onClosingTransaction();
+          }}
+          transaction={this.props.transaction}
+        />
       </ItemsCarousel>
     );
   }

@@ -1,15 +1,25 @@
 import React from 'react';
 import { Typography, Button } from '@material-ui/core';
 
-export default function ThankYouScreen({ onCloseDonation }) {
+function getMessage(transaction) {
+  if (transaction.recipient.type === 'CITIZEN_IN_NEEDS') {
+    return `Merci d'avoir donné ${transaction.donation.amount}$ à une personne dans le besoin!`;
+  }
+  return `Merci d'avoir donné ${transaction.donation.amount}$ à ${transaction.recipient.name}!`;
+}
+
+export default function ThankYouScreen({ onCloseDonation, transaction }) {
+  console.log(transaction);
   return (
     <div style={{
       flex: 1, display: 'flex', flexDirection: 'column', marginTop: 50,
     }}
     >
-      <Typography align="center" variant="h4">
-        Merci pour votre donation!
-      </Typography>
+      {transaction &&
+        <Typography align="center" variant="h5">
+          {getMessage(transaction)}
+        </Typography>
+      }
 
 
       <div style={{

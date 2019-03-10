@@ -30,7 +30,6 @@ const amounts = [
 
 export default class AmountList extends React.Component {
   render() {
-    console.log(this.props.title);
     return (
       <div style={{ flex: 1, overflowY: 'scroll' }} key={0}>
         <AppBar position="static">
