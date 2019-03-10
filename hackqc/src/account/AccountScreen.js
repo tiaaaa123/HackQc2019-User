@@ -5,6 +5,11 @@ import {
 import sortBy from 'lodash.sortby';
 import Client from '../Client';
 
+const title = {
+  citizens: 'Historique des dons',
+  organisations: 'Historique des transactions',
+};
+
 export default class AccountScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -39,7 +44,7 @@ export default class AccountScreen extends React.Component {
           </Toolbar>
         </AppBar>
 
-        <Typography variant="h6" color="inherit" style={{ margin: '3px 0 3px 15px' }}>Historique des dons</Typography>
+        <Typography variant="h6" color="inherit" style={{ margin: '3px 0 3px 15px' }}>{title[this.props.type]}</Typography>
 
         <List style={{ marginTop: -7 }}>
           <Divider />

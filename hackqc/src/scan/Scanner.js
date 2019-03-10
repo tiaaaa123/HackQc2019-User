@@ -45,7 +45,7 @@ class Scanner extends React.Component {
       <div>
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="h6" color="inherit">Scan a QR code</Typography>
+            <Typography variant="h6" color="inherit">Scanner un code QR</Typography>
           </Toolbar>
         </AppBar>
         <QrReader
