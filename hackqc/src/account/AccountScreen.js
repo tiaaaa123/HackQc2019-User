@@ -25,7 +25,7 @@ export default class AccountScreen extends React.Component {
   }
 
   componentDidUpdate(prevProps, nextProps) {
-    if (prevProps.rendered !== nextProps.rendered) {
+    if (prevProps.rendered !== this.props.rendered) {
       this.apiCalls();
     }
   }
