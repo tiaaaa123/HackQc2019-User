@@ -42,11 +42,10 @@ export default class ScannerRouter extends React.Component {
           onGoBack={() => this.setState({ tab: 0 })}
           onAmountPress={async (amount) => {
             try {
-              console.log('amount press');
               await this.props.onSendingDonation(this.state.recipient, amount);
               this.setState({ tab: 2 });
             } catch (e) {
-              console.log(e);
+              // Nothing to do
             }
           }}
           sendingDonation={this.props.sendingDonation}

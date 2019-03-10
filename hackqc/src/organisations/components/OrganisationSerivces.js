@@ -4,15 +4,15 @@ import FoodIcon from '@material-ui/icons/RestaurantMenu';
 import ClotheIcon from '@material-ui/icons/LocalMall';
 import { ListItemIcon } from '@material-ui/core';
 
-export default function OrganisationServices({ organisation, hideLabel }) {
+export default function OrganisationServices({ organisation, hideLabel, size }) {
   return (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'row' }}>
       {organisation.hasShelter() &&
         <ListItemIcon>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <HomeIcon />
+            <HomeIcon style={{ fontSize: size }} />
             {!hideLabel &&
-              <span>Refuge</span>
+              <span style={{ fontSize: 15 }}>Refuge</span>
             }
           </div>
         </ListItemIcon>
@@ -20,9 +20,9 @@ export default function OrganisationServices({ organisation, hideLabel }) {
       {organisation.hasFood() &&
         <ListItemIcon>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <FoodIcon />
+            <FoodIcon style={{ fontSize: size }} />
             {!hideLabel &&
-              <span>Nourriture</span>
+              <span style={{ fontSize: 15 }}>Nourriture</span>
             }
           </div>
         </ListItemIcon>
@@ -30,9 +30,9 @@ export default function OrganisationServices({ organisation, hideLabel }) {
       {organisation.hasClothes() &&
         <ListItemIcon>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <ClotheIcon />
+            <ClotheIcon style={{ fontSize: size }} />
             {!hideLabel &&
-              <span>Vêtements</span>
+              <span style={{ fontSize: 15 }}>Vêtements</span>
             }
           </div>
         </ListItemIcon>

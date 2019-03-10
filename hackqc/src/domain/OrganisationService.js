@@ -4,8 +4,8 @@ export type ServiceType = 'SHELTER' | 'FOOD' | 'CLOTHES';
 class OrganisationService {
   type: ServiceType;
 
-  constructor({ type }) {
-    this.type = type;
+  constructor(props) {
+    this.type = props;
   }
 
   isShelter() {

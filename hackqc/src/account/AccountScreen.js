@@ -37,7 +37,7 @@ export default class AccountScreen extends React.Component {
       const sortedDonations = sortBy(donations, ['donated_at']).reverse().slice(0, 9);
       this.setState({ user, donations: sortedDonations });
     } catch (e) {
-      console.log(e);
+      // Nothing to do
     }
   }
 
@@ -48,7 +48,7 @@ export default class AccountScreen extends React.Component {
       const sortedTransactions = sortBy(transactions, ['redeemed_at']).reverse().slice(0, 9);
       this.setState({ user, donations: sortedTransactions });
     } catch (e) {
-      console.log(e);
+      // Nothing to do
     }
   }
 

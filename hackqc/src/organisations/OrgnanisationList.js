@@ -124,7 +124,7 @@ class OrgnanisationList extends React.Component {
     try {
       const response = await Client.get('organizations');
       const organisations = response.organizations.map(o => Organisation.parse(o));
-      const orderedList = organisations.map(Organisation.parse).sort((a, b) => a.distance - b.distance);
+      const orderedList = organisations.sort((a, b) => a.distance - b.distance);
       this.setState({ organisations: orderedList });
     } catch (e) {
       this.setState({ organisations: lists });

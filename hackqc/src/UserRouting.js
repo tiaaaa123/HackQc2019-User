@@ -41,7 +41,6 @@ class UserRouting extends Component {
 
   sendDonation = async (recipient, amount) => {
     try {
-      console.log('sending donation');
       this.setState({ sendingDonation: true });
 
       const response = await Client.post('citizens/me/donations', {

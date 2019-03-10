@@ -44,7 +44,7 @@ export default class OrganisationRouter extends React.Component {
               await this.props.onSendingDonation(this.state.organisation, amount);
               this.setState({ tab: 3 });
             } catch (e) {
-              console.log(e);
+              // Nothing to do
             }
           }}
           sendingDonation={this.props.sendingDonation}
