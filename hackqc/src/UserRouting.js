@@ -82,7 +82,7 @@ class UserRouting extends Component {
               onClosingTransaction={() => this.setState({ transaction: undefined })}
               ref={item => this.organisationRoute = item}
             />
-            <AccountScreen type="citizens" key={2} />
+            <AccountScreen type="citizens" key={2} rendered={this.state.tab === 2} />
           </ItemsCarousel>
 
         </div>

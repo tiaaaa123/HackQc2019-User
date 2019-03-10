@@ -12,7 +12,9 @@ export default class OrganisationRouter extends React.Component {
   }
 
   resetTab = () => {
-    this.setState({ tab: 0 });
+    setTimeout(() => {
+      this.setState({ tab: 0 });
+    }, 500);
   }
 
 

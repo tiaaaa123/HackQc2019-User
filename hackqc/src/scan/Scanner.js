@@ -15,24 +15,20 @@ class Scanner extends React.Component {
     lookingForEntity: false,
   }
 
-  throttleSelectRecipient = throttle((recipient) => {
-    this.setState({ lookingForEntity: false }, () => {
-      this.props.onRecipientFound(recipient);
-    });
-  }, 2000, { trailing: false, leading: true })
-
   handleScan = async (data) => {
+    if (!this.props.rendered) return;
     if (data && (typeof data === 'string' || data instanceof String)) {
+      if (this.state.lookingForEntity) return;
       await this.setState({ lookingForEntity: true });
 
       const splittedData = data.split('/');
       const entityUUID = splittedData[splittedData.length - 1];
       const recipient = await Client.get(`recipients/${entityUUID}?lon=0&lat=0`, {});
-      if (recipient.type === 'CITIZEN_IN_NEEDS') {
-        setTimeout(() => {
-          this.throttleSelectRecipient(recipient);
-        }, 400);
-      }
+      setTimeout(async () => {
+        await this.setState({ lookingForEntity: false }, () => {
+          this.props.onRecipientFound(recipient);
+        });
+      }, 400);
     }
   }
 
@@ -48,19 +44,24 @@ class Scanner extends React.Component {
             <Typography variant="h6" color="inherit">Scan a QR code</Typography>
           </Toolbar>
         </AppBar>
-        <QrReader
-          delay={300}
-          onError={this.handleError}
-          onScan={this.handleScan}
-          style={{ width: '100%' }}
-        />
-        <Typography align="center"
-          style={{ padding: '20px 10px' }}
-        >
-          {instructions[this.props.type]}
-        </Typography>
+        <div style={{ position: 'relative' }}>
+          <QrReader
+            delay={300}
+            onError={this.handleError}
+            onScan={this.handleScan}
+            style={{ width: '100%' }}
+          />
+          <OverlaySpinner open={this.state.lookingForEntity} />
 
-        <OverlaySpinner open={this.state.lookingForEntity} />
+        </div>
+
+        <Typography align="center">
+          <p
+            style={{ padding: '20px 10px' }}
+          >
+            {instructions[this.props.type]}
+          </p>
+        </Typography>
       </div>
     );
   }

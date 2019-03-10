@@ -16,10 +16,12 @@ export default class AccountScreen extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.type === 'organisations') {
-      this.fetchOrganization();
-    } else {
-      this.fetchAccount();
+    this.apiCalls();
+  }
+
+  componentDidUpdate(prevProps, nextProps) {
+    if (prevProps.rendered !== nextProps.rendered) {
+      this.apiCalls();
     }
   }
 
@@ -42,6 +44,14 @@ export default class AccountScreen extends React.Component {
       this.setState({ user, donations: sortedTransactions });
     } catch (e) {
       console.log(e);
+    }
+  }
+
+  apiCalls = () => {
+    if (this.props.type === 'organisations') {
+      this.fetchOrganization();
+    } else {
+      this.fetchAccount();
     }
   }
 

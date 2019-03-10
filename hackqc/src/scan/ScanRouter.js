@@ -20,7 +20,9 @@ export default class ScannerRouter extends React.Component {
   }
 
   resetTab = () => {
-    this.setState({ tab: 0 });
+    setTimeout(() => {
+      this.setState({ tab: 0 });
+    }, 500);
   }
 
   render() {
@@ -33,6 +35,7 @@ export default class ScannerRouter extends React.Component {
           key={0}
           onRecipientFound={recipient => this.setState({ tab: 1, recipient: recipient })}
           type={this.props.type}
+          rendered={this.state.tab === 0}
         />
         <AmountList
           key={1}
