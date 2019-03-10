@@ -19,6 +19,10 @@ export default class ScannerRouter extends React.Component {
     };
   }
 
+  resetTab = () => {
+    this.setState({ tab: 0 });
+  }
+
   render() {
     return (
       <ItemsCarousel
@@ -49,6 +53,7 @@ export default class ScannerRouter extends React.Component {
             this.props.onClosingTransaction();
           }}
           transaction={this.props.transaction}
+          type={this.props.type}
         />
       </ItemsCarousel>
     );

@@ -23,10 +23,14 @@ class StaffRouting extends Component {
   state = {
     tab: 0,
     sendingDonation: false,
+    transaction: undefined,
   };
 
   handleChange = (event, value) => {
     this.setState({ tab: value });
+    if (value !== 0) {
+      this.scannerRoute.resetTab();
+    }
   };
 
   sendDonation = async (recipient, amount) => {
@@ -39,7 +43,7 @@ class StaffRouting extends Component {
         service: 'FOOD',
       });
 
-      this.setState({ sendingDonation: false });
+      this.setState({ sendingDonation: false, transaction: response });
     } catch (e) {
       this.setState({ sendingDonation: false });
       throw e;
@@ -58,7 +62,10 @@ class StaffRouting extends Component {
               key={0}
               onSendingDonation={this.sendDonation}
               sendingDonation={this.state.sendingDonation}
+              transaction={this.state.transaction}
               type="organisations"
+              onClosingTransaction={() => this.setState({ transaction: undefined })}
+              ref={item => this.scannerRoute = item}
             />
             <AccountScreen key={2} type="organisations" />
           </ItemsCarousel>

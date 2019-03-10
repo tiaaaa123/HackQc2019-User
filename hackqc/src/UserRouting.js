@@ -30,6 +30,13 @@ class UserRouting extends Component {
 
   handleChange = (event, value) => {
     this.setState({ tab: value });
+
+    if (value !== 0) {
+      this.scannerRoute.resetTab();
+    }
+    if (value !== 1) {
+      this.organisationRoute.resetTab();
+    }
   };
 
   sendDonation = async (recipient, amount) => {
@@ -41,11 +48,10 @@ class UserRouting extends Component {
         to: recipient.reference,
         amount: amount,
       });
-      console.log(response);
+
       this.setState({ sendingDonation: false, transaction: response });
     } catch (e) {
       this.setState({ sendingDonation: false });
-      console.log(e);
       throw e;
     }
   }
@@ -63,7 +69,9 @@ class UserRouting extends Component {
               onSendingDonation={this.sendDonation}
               sendingDonation={this.state.sendingDonation}
               transaction={this.state.transaction}
+              type="citizens"
               onClosingTransaction={() => this.setState({ transaction: undefined })}
+              ref={item => this.scannerRoute = item}
             />
             <OrganisationRouter
               key={1}
@@ -72,6 +80,7 @@ class UserRouting extends Component {
               type="citizens"
               transaction={this.state.transaction}
               onClosingTransaction={() => this.setState({ transaction: undefined })}
+              ref={item => this.organisationRoute = item}
             />
             <AccountScreen type="citizens" key={2} />
           </ItemsCarousel>

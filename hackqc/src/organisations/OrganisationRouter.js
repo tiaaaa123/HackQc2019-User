@@ -11,6 +11,11 @@ export default class OrganisationRouter extends React.Component {
     organisation: undefined,
   }
 
+  resetTab = () => {
+    this.setState({ tab: 0 });
+  }
+
+
   render() {
     return (
       <ItemsCarousel
